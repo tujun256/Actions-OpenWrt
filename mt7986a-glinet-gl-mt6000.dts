@@ -287,10 +287,6 @@
 	status = "okay";
 };
 
-&usb_phy {
-	status = "okay";
-};
-
 &watchdog {
 	status = "okay";
 };
