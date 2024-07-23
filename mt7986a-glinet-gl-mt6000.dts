@@ -279,12 +279,6 @@
 	status = "okay";
 };
 
-&ssusb {
-	vusb33-supply = <&reg_3p3v>;
-	vbus-supply = <&usb_vbus>;
-	status = "okay";
-};
-
 &trng {
 	status = "okay";
 };
@@ -298,14 +292,6 @@
 };
 
 &watchdog {
-	status = "okay";
-};
-
-&wifi {
-	nvmem-cells = <&eeprom_factory_0>;
-	nvmem-cell-names = "eeprom";
-	pinctrl-names = "default";
-	pinctrl-0 = <&wf_2g_5g_pins>;
 	status = "okay";
 };
 
