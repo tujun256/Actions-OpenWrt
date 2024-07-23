@@ -21,4 +21,4 @@
 
 #echo "src-git mtk_openwrt_feed https://git01.mediatek.com/openwrt/feeds/mtk-openwrt-feeds" >> feeds.conf.default
 
-cp -rf $GITHUB_WORKSPACE/mt7986a-glinet-gl-mt6000.dts $GITHUB_WORKSPACE/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-glinet-gl-mt6000.dts
+cp -rf $GITHUB_WORKSPACE/mt7986a-glinet-gl-mt6000_2.dts $GITHUB_WORKSPACE/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-glinet-gl-mt6000.dts
