@@ -28,26 +28,6 @@
 		regulator-boot-on;
 		regulator-always-on;
 	};
-	sound {
-		compatible = "mediatek,mt7986-wm8960-machine";
-		mediatek,platform = <&afe>;
-		audio-routing = "Headphone", "HP_L",
-				"Headphone", "HP_R",
-				"LINPUT1", "AMIC",
-				"RINPUT1", "AMIC";
-		mediatek,audio-codec = <&wm8960>;
-		status = "okay";
-	};
-};
-&fan {
-	pwms = <&pwm 1 50000 0>;
-	status = "disabled";
-};
-&pwm {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pwm0_pin &pwm1_pin_g1>;
-	status = "okay";
-};
 &uart0 {
 	status = "okay";
 };
@@ -70,81 +50,111 @@
 		reg = <0x1a>;
 	};
 };
-&auxadc {
-	status = "okay";
-};
 &watchdog {
 	status = "okay";
 };
 &eth {
 	status = "okay";
+
 	gmac0: mac@0 {
 		compatible = "mediatek,eth-mac";
 		reg = <0>;
 		phy-mode = "2500base-x";
+		//nvmem-cells = <&macaddr_factory_a 2>;
+		//nvmem-cell-names = "mac-address";
+
 		fixed-link {
 			speed = <2500>;
 			full-duplex;
 			pause;
 		};
 	};
+
 	gmac1: mac@1 {
 		compatible = "mediatek,eth-mac";
 		reg = <1>;
+		//nvmem-cells = <&macaddr_factory_a 0>;
+		//nvmem-cell-names = "mac-address";
 		phy-mode = "2500base-x";
-		phy-handle = <&phy6>;
+		phy-handle = <&phy5>;
 	};
+
 	mdio: mdio-bus {
 		#address-cells = <1>;
 		#size-cells = <0>;
-		reset-gpios = <&pio 6 1>;
-		reset-delay-us = <600>;
-		phy5: phy@5 {
+
+		phy7: phy@7 {
+			compatible = "ethernet-phy-ieee802.3-c45";
+			reg = <7>;
+			reset-assert-us = <100000>;
+			reset-deassert-us = <100000>;
+			reset-gpios = <0x14 0x06 0x01>;
+			//interrupt-parent = <&pio>;
+			//interrupts = <46 IRQ_TYPE_LEVEL_LOW>;
+			realtek,aldps-enable;
+		};
+
+		phy5: ethernet-phy@5 {
 			compatible = "ethernet-phy-ieee802.3-c45";
 			reg = <5>;
+			reset-assert-us = <100000>;
+			reset-deassert-us = <100000>;
+			reset-gpios = <0x14 0x30 0x01>;
+			//interrupt-parent = <&pio>;
+			//interrupts = <47 IRQ_TYPE_LEVEL_LOW>;
+			realtek,aldps-enable;
 		};
-		phy6: phy@6 {
-			compatible = "ethernet-phy-ieee802.3-c45";
-			reg = <6>;
-		};
-		switch@0 {
+
+		switch: switch@0 {
 			compatible = "mediatek,mt7531";
 			reg = <31>;
-			reset-gpios = <&pio 5 0>;
+			reset-gpios = <0x14 0x05 0x00>;
+			interrupt-controller;
+			#interrupt-cells = <1>;
+			//interrupt-parent = <&pio>;
+			//interrupts = <66 IRQ_TYPE_LEVEL_HIGH>;
+
 			ports {
 				#address-cells = <1>;
 				#size-cells = <0>;
+
 				port@0 {
-					reg = <0>;
+					reg = <0x00>;
 					label = "lan0";
 				};
+
 				port@1 {
-					reg = <1>;
+					reg = <0x01>;
 					label = "lan1";
 				};
+
 				port@2 {
-					reg = <2>;
+					reg = <0x02>;
 					label = "lan2";
 				};
+
 				port@3 {
-					reg = <3>;
+					reg = <0x03>;
 					label = "lan3";
 				};
+
 				port@4 {
-					reg = <4>;
+					reg = <0x04>;
 					label = "lan4";
 				};
+
 				port@5 {
-					reg = <5>;
+					reg = <0x5>;
 					label = "lan5";
-					phy-mode = "2500base-x";
 					phy-handle = <&phy5>;
+					phy-mode = "2500base-x";
 				};
+
 				port@6 {
-					reg = <6>;
-					label = "cpu";
+					reg = <0x6>;
 					ethernet = <&gmac0>;
 					phy-mode = "2500base-x";
+
 					fixed-link {
 						speed = <2500>;
 						full-duplex;
