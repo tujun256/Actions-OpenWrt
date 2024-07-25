@@ -34,6 +34,8 @@ END
 # 将内容追加到文件末尾
 echo "$CONTENT" >> "$FILE"
 
+touch target/linux/*/Makefile
+
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
