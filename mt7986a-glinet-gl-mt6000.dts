@@ -137,13 +137,6 @@
 	};
 };
 
-&hnat {
-	mtketh-wan = "eth1";
-	mtketh-lan = "eth0";
-	mtketh-max-gmac = <2>;
-	status = "okay";
-};
-
 &gsw {
 	mediatek,mdio = <&mdio>;
 	mediatek,portmap = "lllll";
@@ -276,11 +269,5 @@
 };
 
 &watchdog {
-	status = "okay";
-};
-
-&wbsys {
-	pinctrl-names = "default";
-	pinctrl-0 = <&wf_2g_5g_pins>;
 	status = "okay";
 };
