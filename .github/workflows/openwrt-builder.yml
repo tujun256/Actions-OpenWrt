@@ -82,9 +82,7 @@ jobs:
       run: |
         cp -rf mt7986a-glinet-gl-mt6000.dts openwrt/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
         cd openwrt
-        sed -i '/xdr6088)/ {n; /lan1 lan2 lan3 lan4 lan5/ {s/lan1 lan2 lan3 lan4 lan5/eth0/; a\
-        \t\tucidef_add_switch "switch0" "1:lan" "2:lan" "3:lan" "4:lan" "5:lan" "6u@eth0"
-        }}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
+        #sed -i '/xdr6088)/ {n; /lan1 lan2 lan3 lan4 lan5/ {s/lan1 lan2 lan3 lan4 lan5/eth0/; a\\t\tucidef_add_switch "switch0" "1:lan" "2:lan" "3:lan" "4:lan" "5:lan" "6u@eth0"}}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
         cat target/linux/mediatek/filogic/base-files/etc/board.d/02_network
         #sed -i 's/MT7986_ePAeLNA_EEPROM_AX6000.bin/MT7986_iPAiLNA_EEPROM_AX6000.bin/g' target/linux/mediatek/mt7986/base-files/lib/preinit/90_extract_caldata
         #cat target/linux/mediatek/mt7986/base-files/lib/preinit/90_extract_caldata
