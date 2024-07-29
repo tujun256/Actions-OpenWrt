@@ -1,74 +1,47 @@
-// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-
 /dts-v1/;
-#include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/input/input.h>
-//#include <dt-bindings/leds/common.h>
-#include <dt-bindings/pinctrl/mt65xx.h>
-
 #include "mt7986a.dtsi"
 //#include "mt7986a-pinctrl.dtsi"
-
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/leds/common.h>
 / {
 	model = "GL.iNet GL-MT6000";
 	compatible = "glinet,gl-mt6000", "mediatek,mt7986a";
 
-	aliases {
-		led-boot = &red_led;
-		led-failsafe = &red_led;
-		led-running = &green_led;
-		led-upgrade = &green_led;
-	};
-
 	chosen {
-		bootargs = "console=ttyS0,115200n1 loglevel=8  \
-				earlycon=uart8250,mmio32,0x11002000 \
-				root=PARTLABEL=rootfs rootwait rootfstype=squashfs,f2fs";
+		bootargs = "console=ttyS0,115200n1 loglevel=8 \
+			    earlycon=uart8250,mmio32,0x11002000 \
+			    root=PARTLABEL=rootfs rootwait rootfstype=squashfs,f2fs";
 	};
+	
+	// aliases {
+	// 	led-boot = &led_status_white;
+ 	// 	led-failsafe = &led_status_white;
+ 	// 	led-running = &led_status_blue;
+ 	// 	led-upgrade = &led_status_blue;
+	// };
 
 	memory {
-		reg = <0 0x40000000 0 0x40000000>;
-	};
-
-	gsw: gsw@0 {
-		compatible = "mediatek,mt753x";
-		mediatek,ethsys = <&ethsys>;
-		#address-cells = <1>;
-		#size-cells = <0>;
+		reg = <0 0x40000000 0 0x10000000>;
 	};
 
 	gpio-keys {
 		compatible = "gpio-keys";
 
-		button-joylink {
-			label = "joylink";
-			linux,code = <BTN_0>;
-			gpios = <&pio 10 GPIO_ACTIVE_LOW>;
-		};
-
-		button-reset {
+		reset {
 			label = "reset";
-			linux,code = <KEY_RESTART>;
-			gpios = <&pio 9 GPIO_ACTIVE_LOW>;
+			linux,code = <0x198>;
+			gpios = <0x14 0x10 0x01>;
 		};
 	};
 
 	gpio-leds {
 		compatible = "gpio-leds";
 
-		led-0 {
-			label = "blue:status";
-			gpios = <&pio 7 GPIO_ACTIVE_HIGH>;
-		};
-
-		red_led: led-1 {
-			label = "red:status";
-			gpios = <&pio 11 GPIO_ACTIVE_HIGH>;
-		};
-
-		green_led: led-2 {
-			label = "green:status";
-			gpios = <&pio 12 GPIO_ACTIVE_LOW>;
+		green {
+			label = "green";
+			gpios = <0x14 0x16 0x01>;
+			default-state = "off";
 		};
 	};
 
@@ -91,6 +64,14 @@
 	};
 };
 
+&uart0 {
+	status = "okay";
+};
+
+&watchdog {
+	status = "okay";
+};
+
 &eth {
 	status = "okay";
 
@@ -98,22 +79,23 @@
 		compatible = "mediatek,eth-mac";
 		reg = <0>;
 		phy-mode = "2500base-x";
-
+		phandle = <0x1a>;
+		//ext-phy-reg = <1>;
+		//ext-phy-reset-gpios = <&pio 10 0>;
 		fixed-link {
 			speed = <2500>;
 			full-duplex;
 			pause;
-		};
+		};	
 	};
 
 	gmac1: mac@1 {
 		compatible = "mediatek,eth-mac";
 		reg = <1>;
 		phy-mode = "2500base-x";
-
-		ext-phy-reg = <6>;
-		ext-phy-reset-gpios = <&pio 6 0>;
-
+		phandle = <0x18>;
+		//ext-phy-reg = <7>;
+		//ext-phy-reset-gpios = <&pio 19 0>;	
 		fixed-link {
 			speed = <2500>;
 			full-duplex;
@@ -125,48 +107,96 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 
-		phy5: phy@5 {
-			compatible = "ethernet-phy-id67c9.de0a";
-			reg = <5>;
-		};
+		ethernet-phy@7 {
+		compatible = "ethernet-phy-ieee802.3-c45";
+		reg = <0x07>;
+		reset-gpios = <0x14 0x06 0x01>;
+		reset-assert-us = <0x186a0>;
+		reset-deassert-us = <0x186a0>;
+		phy-mode = "2500base-x";
+		phandle = <0x18>;
+	};
 
-		phy6: phy@6 {
-			compatible = "ethernet-phy-ieee802.3-c45";
-			reg = <6>;
+		ethernet-phy@5 {
+		compatible = "ethernet-phy-ieee802.3-c45";
+		reg = <0x05>;
+		reset-gpios = <0x14 0x30 0x01>;
+		reset-assert-us = <0x186a0>;
+		reset-deassert-us = <0x186a0>;
+		phy-mode = "2500base-x";
+		phandle = <0x19>;
+	};
+ 		
+		switch@0 {
+			compatible = "mediatek,mt7531";
+			reg = <31>;
+			reset-gpios = <0x14 0x05 0x00>;
+
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				port@0 {
+					reg = <0>;
+					label = "lan0";
+				};
+
+				port@1 {
+					reg = <1>;
+					label = "lan1";
+				};
+
+				port@2 {
+					reg = <2>;
+					label = "lan2";
+				};
+
+				port@3 {
+					reg = <3>;
+					label = "lan3";
+				};
+
+				port@4 {
+					reg = <3>;
+					label = "lan4";
+				};
+
+				port@5 {
+					reg = <5>;
+					label = "lan5";
+					phy-mode = "2500base-x";
+					phy-handle = <0x19>;
+
+					fixed-link {
+						speed = <2500>;
+						full-duplex;
+						pause;
+					};
+				};
+
+				port@6 {
+					reg = <6>;
+					label = "cpu";
+					ethernet = <&gmac0>;
+					phy-mode = "2500base-x";
+
+					fixed-link {
+						speed = <2500>;
+						full-duplex;
+						pause;
+					};
+				};
+			};
 		};
 	};
 };
 
-&gsw {
-	mediatek,mdio = <&mdio>;
-	mediatek,portmap = "lllll";
-	mediatek,mdio_master_pinmux = <0>;
-	reset-gpios = <&pio 5 0>;
-	interrupt-parent = <&pio>;
-	interrupts = <66 IRQ_TYPE_LEVEL_HIGH>;
+
+&hnat {
+	mtketh-wan = "eth1";
+	mtketh-lan = "lan";
+	mtketh-max-gmac = <2>;
 	status = "okay";
-
-	port5: port@5 {
-		compatible = "mediatek,mt753x-port";
-		reg = <5>;
-		phy-mode = "sgmii";
-
-		fixed-link {
-			speed = <2500>;
-			full-duplex;
-		};
-	};
-
-	port6: port@6 {
-		compatible = "mediatek,mt753x-port";
-		mediatek,ssc-on;
-		reg = <6>;
-		phy-mode = "sgmii";
-		fixed-link {
-			speed = <2500>;
-			full-duplex;
-		};
-	};
 };
 
 &mmc0 {
@@ -184,6 +214,18 @@
 	pinctrl-1 = <&mmc0_pins_uhs>;
 	vmmc-supply = <&reg_3p3v>;
 	vqmmc-supply = <&reg_1p8v>;
+	status = "okay";
+};
+
+&pcie0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pcie0_pins>;
+	status = "okay";
+};
+
+&wbsys {
+	pinctrl-names = "default";
+	pinctrl-0 = <&wf_2g_5g_pins>;
 	status = "okay";
 };
 
@@ -262,12 +304,4 @@
 			drive-strength = <MTK_DRIVE_4mA>;
 		};
 	};
-};
-
-&uart0 {
-	status = "okay";
-};
-
-&watchdog {
-	status = "okay";
 };
