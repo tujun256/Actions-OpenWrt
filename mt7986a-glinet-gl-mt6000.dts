@@ -108,7 +108,7 @@
 			reg = <7>;
 			reset-assert-us = <100000>;
 			reset-deassert-us = <100000>;
-			reset-gpios = <&pio 6 GPIO_ACTIVE_LOW>>;
+			reset-gpios = <&pio 6 GPIO_ACTIVE_LOW>;
 			interrupt-parent = <&pio>;
 			//interrupts = <46 IRQ_TYPE_LEVEL_LOW>;
 			realtek,aldps-enable;
@@ -119,7 +119,7 @@
 			reg = <5>;
 			reset-assert-us = <100000>;
 			reset-deassert-us = <100000>;
-			reset-gpios = <<&pio 48 GPIO_ACTIVE_LOW>>;
+			reset-gpios = <<&pio 48 GPIO_ACTIVE_LOW>;
 			interrupt-parent = <&pio>;
 			//interrupts = <47 IRQ_TYPE_LEVEL_LOW>;
 			realtek,aldps-enable;
