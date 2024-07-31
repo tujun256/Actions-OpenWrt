@@ -105,7 +105,7 @@
 
 		phy7: ethernet-phy@7 {
 			compatible = "ethernet-phy-ieee802.3-c45";
-			reg = <1>;
+			reg = <7>;
 			reset-assert-us = <100000>;
 			reset-deassert-us = <100000>;
 			reset-gpios = <&pio 6 GPIO_ACTIVE_LOW>>;
@@ -116,7 +116,7 @@
 
 		phy5: ethernet-phy@5 {
 			compatible = "ethernet-phy-ieee802.3-c45";
-			reg = <7>;
+			reg = <5>;
 			reset-assert-us = <100000>;
 			reset-deassert-us = <100000>;
 			reset-gpios = <<&pio 48 GPIO_ACTIVE_LOW>>;
@@ -127,7 +127,7 @@
 
 		switch: switch@1f {
 			compatible = "mediatek,mt7531";
-			reg = <5>;
+			reg = <31>;
 			reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
 			interrupt-controller;
 			#interrupt-cells = <1>;
