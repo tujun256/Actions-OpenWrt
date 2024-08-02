@@ -52,4 +52,7 @@ df -h
 #for file in $(find ./feeds/mtk_openwrt_feed/21.02/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
 
 #for file in $(find ./feeds/mtk_openwrt_feed/21.02/patches-feeds -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
+cd ${GITHUB_WORKSPACE}/openwrt
+cp -af ./feeds/mtk_openwrt_feed/master/files/* .
+for file in $(find ./feeds/mtk_openwrt_feed/master/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
 touch target/linux/*/Makefile
