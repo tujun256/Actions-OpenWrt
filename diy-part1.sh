@@ -35,6 +35,6 @@ sed -i '/glinet,gl-mt6000)/,/;;/{
 
 cat target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 
-sed -i 's/0x0/0x19a/g' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
+#sed -i 's/0x0/0x19a/g' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
 
 cat target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
