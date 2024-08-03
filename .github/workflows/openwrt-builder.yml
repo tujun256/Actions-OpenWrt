@@ -56,10 +56,10 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        git clone https://github.com/hanwckf/immortalwrt-mt798x
-        pwd
-        cp -rf immortalwrt-mt798x/package/mtk openwrt/package/
-        ls -l openwrt/package/
+        #git clone https://github.com/hanwckf/immortalwrt-mt798x
+        #pwd
+        #cp -rf immortalwrt-mt798x/package/mtk openwrt/package/
+        #ls -l openwrt/package/
 
     - name: Load custom feeds
       run: |
