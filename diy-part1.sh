@@ -25,18 +25,18 @@ pwd
 
 # cp -rf $GITHUB_WORKSPACE/mt7986a-emmc-rfb.dts $GITHUB_WORKSPACE/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
 
-#    sed -i '/tl-xdr6088/{n;s/lan1 lan2 lan3 lan4 lan5/lan0 lan1 lan2 lan3 lan4 lan5/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
-#sed -i '/glinet,gl-mt6000)/,/;;/{s/factory 0x0a/factory 0x2A/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
+sed -i '/tl-xdr6088/{n;s/lan1 lan2 lan3 lan4 lan5/lan0 lan1 lan2 lan3 lan4 lan5/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
+sed -i '/glinet,gl-mt6000)/,/;;/{s/factory 0x0a/factory 0x2A/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 
-#    sed -i '/glinet,gl-mt6000)/,/;;/{
-#        s/label_mac=\$(mmc_get_mac_binary factory 0x[0-9a-fA-F]\+)/wan_mac=$(mmc_get_mac_binary factory 0x2a)#    /
-#        s/wan_mac=\$label_mac/lan_mac=$(mmc_get_mac_binary factory 0x24)/
-#        s/lan_mac=\$(macaddr_add "\$label_mac" 2)/label_mac=$wan_mac/
-#    }' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
+sed -i '/glinet,gl-mt6000)/,/;;/{
+        s/label_mac=\$(mmc_get_mac_binary factory 0x[0-9a-fA-F]\+)/wan_mac=$(mmc_get_mac_binary factory 0x2a)#    /
+        s/wan_mac=\$label_mac/lan_mac=$(mmc_get_mac_binary factory 0x24)/
+        s/lan_mac=\$(macaddr_add "\$label_mac" 2)/label_mac=$wan_mac/
+    }' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 
 cat target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 
-#sed -i 's/0x0/0x19a/g' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
+sed -i 's/0x0/0x19a/g' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
 sed -i '/glinet,gl-mt6000/d' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
 
 sed -i '/smartrg,sdg-8622|\\$/a\        glinet,gl-mt6000|\\' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
