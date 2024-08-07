@@ -9,6 +9,8 @@
 # This is free software, licensed under the MIT License.
 # See /LICENSE for more information.
 #
+cd ${GITHUB_WORKSPACE}/openwrt
+
 df -h
 
 # #append_to_mk
@@ -35,24 +37,7 @@ df -h
 # # 将内容追加到文件末尾
 # echo "$CONTENT" >> "$FILE"
 
-
-# Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
-
-# Modify default theme
-#sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-
-# Modify hostname
-#sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
-
-#cp -af ./feeds/mtk_openwrt_feed/21.02/files/* .
-
-#cp -af ./feeds/mtk_openwrt_feed/tools .
-
-#for file in $(find ./feeds/mtk_openwrt_feed/21.02/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
-
-#for file in $(find ./feeds/mtk_openwrt_feed/21.02/patches-feeds -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
-#cd ${GITHUB_WORKSPACE}/openwrt
-#cp -af ./feeds/mtk_openwrt_feed/master/files/* .
-#for file in $(find ./feeds/mtk_openwrt_feed/master/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
+cp -af ./feeds/mtk_openwrt_feed/master/files/* .
+for file in $(find ./feeds/mtk_openwrt_feed/master/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
 touch target/linux/*/Makefile
+exit 0
