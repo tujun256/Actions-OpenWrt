@@ -37,26 +37,27 @@ pwd
 cat target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 
 #sed -i 's/0x0/0x19a/g' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
-#sed -i '/glinet,gl-mt6000/d' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
+sed -i '/glinet,gl-mt6000/d' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
 
-#sed -i '/smartrg,sdg-8622|\\$/a\        glinet,gl-mt6000|\\' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
+sed -i '/smartrg,sdg-8622|\\$/a\        glinet,gl-mt6000|\\' target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
 
-#cat target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
-
-
-
-cp -rf ${GITHUB_WORKSPACE}/mt7986a-jdcloud-re-cp-03.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-jdcloud-re-cp-03.dts
-cp -rf ${GITHUB_WORKSPACE}/mt7986a-glinet-gl-mt6000.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-glinet-gl-mt6000.dts
-cp -rf ${GITHUB_WORKSPACE}/mt7986a-emmc-rfb.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
-
-
-cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-glinet-gl-mt6000.dts
-cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-jdcloud-re-cp-03.dts
-cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
+cat target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-caldata
 
 
 
-cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/etc/board.d/02_network
+#cp -rf ${GITHUB_WORKSPACE}/mt7986a-jdcloud-re-cp-03.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-jdcloud-re-cp-03.dts
+cp -rf ${GITHUB_WORKSPACE}/mt7986a-glinet-gl-mt6000.dts ${GITHUB_WORKSPACE}/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
+cat ${GITHUB_WORKSPACE}/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
+#cp -rf ${GITHUB_WORKSPACE}/mt7986a-emmc-rfb.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
+
+
+#cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-glinet-gl-mt6000.dts
+#cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-jdcloud-re-cp-03.dts
+#cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
+
+
+
+#cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/etc/board.d/02_network
 
 sed -i 's/MT7986_ePAeLNA_EEPROM_AX6000.bin/MT7986_iPAiLNA_EEPROM_AX6000.bin/g' ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/lib/preinit/90_extract_caldata
 cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/lib/preinit/90_extract_caldata
