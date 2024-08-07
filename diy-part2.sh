@@ -37,7 +37,5 @@ df -h
 # # 将内容追加到文件末尾
 # echo "$CONTENT" >> "$FILE"
 
-cp -af ./feeds/mtk_openwrt_feed/master/files/* .
-for file in $(find ./feeds/mtk_openwrt_feed/master/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
 touch target/linux/*/Makefile
 exit 0
