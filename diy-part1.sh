@@ -25,7 +25,7 @@ pwd
 
 # cp -rf $GITHUB_WORKSPACE/mt7986a-emmc-rfb.dts $GITHUB_WORKSPACE/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
 
-sed -i '/tl-xdr6088/{n;s/lan1 lan2 lan3 lan4 lan5/lan1 lan2 lan3 lan4 lan5/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
+sed -i '/tl-xdr6088/{n;s/lan1 lan2 lan3 lan4 lan5/lan1 lan2 lan3 lan4 lan5 lan6/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 sed -i '/glinet,gl-mt6000)/,/;;/{s/factory 0x0a/factory 0x2A/}' target/linux/mediatek/filogic/base-files/etc/board.d/02_network
 
 sed -i '/glinet,gl-mt6000)/,/;;/{
