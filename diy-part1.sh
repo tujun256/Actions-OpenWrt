@@ -46,8 +46,8 @@ cat target/linux/mediatek/filogic/base-files/etc/hotplug.d/firmware/11-mt76-cald
 
 
 #cp -rf ${GITHUB_WORKSPACE}/mt7986a-jdcloud-re-cp-03.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-jdcloud-re-cp-03.dts
-cp -rf ${GITHUB_WORKSPACE}/mt7986a-glinet-gl-mt6000.dts ${GITHUB_WORKSPACE}/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
-cat ${GITHUB_WORKSPACE}/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
+cp -rf ${GITHUB_WORKSPACE}/mt7986a-glinet-gl-mt6000.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
+cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/dts/mt7986a-glinet-gl-mt6000.dts
 #cp -rf ${GITHUB_WORKSPACE}/mt7986a-emmc-rfb.dts ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7986a-emmc-rfb.dts
 
 
