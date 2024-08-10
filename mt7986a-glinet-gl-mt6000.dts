@@ -11,13 +11,13 @@
 	model = "GL.iNet GL-MT6000";
 	compatible = "glinet,gl-mt6000", "mediatek,mt7986a";
 
-	aliases {
-		serial0 = &uart0;
-		led-boot = &led_blue;
-		led-failsafe = &led_blue;
-		led-running = &led_white;
-		led-upgrade = &led_white;
-	};
+	//aliases {
+		//serial0 = &uart0;
+		//led-boot = &led_blue;
+		//led-failsafe = &led_blue;
+		//led-running = &led_white;
+		//led-upgrade = &led_white;
+	//};
 
 	chosen {
 		stdout-path = "serial0:115200n8";
