@@ -62,6 +62,8 @@ cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/dts/mt7986a-glinet-gl-mt60
 
 
 #cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/etc/board.d/02_network
+sed -i 's/mt7986_eeprom_mt7976_dual.bin/mt7986_eeprom_mt7975_dual.bin/g' target/linux/mediatek/filogic/base-files/lib/preinit/81_fix_eeprom
+cat target/linux/mediatek/filogic/base-files/lib/preinit/81_fix_eeprom
 
 #sed -i 's/MT7986_ePAeLNA_EEPROM_AX6000.bin/MT7986_iPAiLNA_EEPROM_AX6000.bin/g' ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/lib/preinit/90_extract_caldata
 #cat ${GITHUB_WORKSPACE}/openwrt/target/linux/mediatek/mt7986/base-files/lib/preinit/90_extract_caldata
