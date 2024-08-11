@@ -78,6 +78,7 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
+        cat .config
         $GITHUB_WORKSPACE/$DIY_P2_SH
         
     - name: Download package
