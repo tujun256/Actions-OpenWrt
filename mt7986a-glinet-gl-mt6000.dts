@@ -41,6 +41,32 @@
 		regulator-boot-on;
 		regulator-always-on;
 	};
+
+	gpio-keys {
+ 		compatible = "gpio-keys";
+
+ 		button-reset {
+ 			label = "reset";
+ 			linux,code = <KEY_RESTART>;
+ 			gpios = <&pio 16 GPIO_ACTIVE_LOW>;
+ 		};
+
+ 	};
+	
+	leds {
+		compatible = "gpio-leds";
+
+		led_status_white: status_white {
+ 			label = "white:status";
+ 			//gpios = <&pio 37 GPIO_ACTIVE_LOW>;
+ 		};
+
+ 		led_status_blue: status_blue {
+ 			label = "blue:status";
+ 			gpios = <&pio 22 GPIO_ACTIVE_LOW>;
+ 		};
+	};
+
 	// keys {
 	// 	compatible = "gpio-keys";
 
